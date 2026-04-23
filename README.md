@@ -126,6 +126,7 @@ docker-compose up -d
 | [架构设计](docs/Architecture-Design.md) | 技术架构详解 |
 | [技术规范](docs/Technical-Specifications.md) | 技术规格说明 |
 | [品牌口号](docs/Brand-Slogans.md) | 品牌标识体系 |
+| [验证报告](docs/Verification-Report.md) | 代码质量验证报告 |
 
 ### 🎯 品牌口号
 
