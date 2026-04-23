@@ -1,68 +1,120 @@
-# 灵犀/MindSync Wiki
+<div align="center">
 
-欢迎来到灵犀/MindSync项目的Wiki文档中心！这里包含了项目的完整文档体系。
+<img src="https://raw.githubusercontent.com/liulanci/-MindSync/main/assets/logo.svg" alt="灵犀/MindSync Logo" width="100" height="100">
 
-## 📚 文档导航
+# 💡 灵犀 / MindSync Wiki
 
-### 🚀 快速开始
-- [快速入门指南](Getting-Started.md) - 5分钟上手使用
-- [安装指南](Installation-Guide.md) - 详细安装步骤
-- [系统要求](System-Requirements.md) - 软硬件环境要求
+### 智能跨平台剪贴板同步知识库 | Intelligent Cross-Platform Clipboard Sync Knowledge Base
 
-### 🔧 用户指南
-- [用户手册](User-Manual.md) - 完整功能使用说明
-- [高级功能](Advanced-Features.md) - 专业功能详解
-- [故障排除](Troubleshooting.md) - 常见问题解决方案
+**心有灵犀 · 同步无界**  
+**When Minds Connect, Data Flows**
 
-### 🛠️ 开发者文档
-- [开发环境搭建](Development-Setup.md) - 本地开发环境配置
-- [API文档](API-Documentation.md) - 完整的API接口说明
-- [架构设计](Architecture-Design.md) - 系统架构和技术选型
-- [贡献指南](CONTRIBUTING.md) - 参与项目开发指南
-
-### 📋 部署指南
-- [服务器部署](Server-Deployment.md) - 生产环境部署说明
-- [客户端部署](Client-Deployment.md) - 各平台客户端部署
-- [Docker部署](Docker-Deployment.md) - 容器化部署方案
-
-### 🔒 安全文档
-- [安全指南](Security-Guide.md) - 安全配置和最佳实践
-- [加密机制](Encryption-Mechanism.md) - 数据加密技术详解
-- [隐私政策](Privacy-Policy.md) - 用户隐私保护说明
-
-### 📊 技术规范
-- [技术架构](Technical-Architecture.md) - 系统技术架构图
-- [数据库设计](Database-Design.md) - 数据库表结构设计
-- [协议规范](Protocol-Specification.md) - 通信协议详细说明
-
-## 🌟 项目特色
-
-### 核心功能
-- **跨平台同步** - 支持Windows、macOS、Linux、Android、iOS
-- **实时传输** - 毫秒级延迟的实时数据同步
-- **端到端加密** - AES-256加密保障数据安全
-- **高性能优化** - 优化的网络传输和数据处理
-
-### 技术优势
-- **云原生架构** - 支持私有化部署和云部署
-- **模块化设计** - 易于扩展和维护
-- **开源免费** - MIT许可证，完全开源
-
-## 📞 支持与联系
-
-- **GitHub Issues**: [问题反馈](https://github.com/liulanci/-MindSync/issues)
-- **邮箱支持**: support@mindsync.com
-- **社区讨论**: [GitHub Discussions](https://github.com/liulanci/-MindSync/discussions)
-
-## 🔄 文档更新
-
-本文档会持续更新，请关注以下内容：
-- 新功能发布说明
-- 安全更新公告
-- 性能优化记录
-- 已知问题修复
+</div>
 
 ---
 
-*最后更新: 2024年12月*  
-*文档版本: v1.0.0*
+## 📚 文档导航 | Documentation Navigation
+
+### 📖 核心文档 | Core Documents
+| 文档 | 中文 | English |
+|------|------|---------|
+| **技术白皮书** | [论文式技术阐述](Technical-Paper.md) | Thesis-style technical paper |
+| **验证报告** | [代码质量验证报告](Verification-Report.md) | Code quality verification report |
+| **快速入门** | [5分钟上手指南](Getting-Started.md) | 5-minute quick start guide |
+| **安装指南** | [详细安装步骤](Installation-Guide.md) | Detailed installation steps |
+
+### 🔧 功能文档 | Feature Documents
+| 文档 | 说明 |
+|------|------|
+| [用户手册](User-Manual.md) | 完整功能使用说明 |
+| [API文档](API-Documentation.md) | RESTful API 接口参考 |
+| [架构设计](Architecture-Design.md) | 系统架构和技术选型 |
+
+### 📋 规范文档 | Specification Documents
+| 文档 | 说明 |
+|------|------|
+| [技术规范](Technical-Specifications.md) | 技术规格说明 |
+| [品牌口号](Brand-Slogans.md) | 品牌标识和口号系统 |
+| [贡献指南](../CONTRIBUTING.md) | 参与项目开发指南 |
+
+---
+
+## 🏗️ 系统架构 | System Architecture
+
+```
+┌─────────────────────────────────────────────┐
+│                  客户端层                     │
+│  桌面端(Electron)  移动端(Android/iOS)        │
+└──────────────────────┬──────────────────────┘
+                       │ WebSocket / REST API
+┌──────────────────────▼──────────────────────┐
+│                  服务端层                     │
+│  认证服务  同步服务  设备管理  历史管理         │
+└──────────────────────┬──────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────┐
+│                  数据层                       │
+│  MySQL  Redis  文件存储                       │
+└─────────────────────────────────────────────┘
+```
+
+### 技术栈 | Technology Stack
+
+| 组件 | 技术 | 说明 |
+|------|------|------|
+| 服务端 | Node.js + Express | RESTful API + WebSocket |
+| 数据库 | MySQL 8.0+ | 持久化存储 |
+| 实时通信 | Socket.IO | 剪贴板实时同步 |
+| 加密 | AES-256-GCM + JWT | 端到端加密 + 身份认证 |
+| 桌面端 | Electron + React | 跨平台桌面应用 |
+| 移动端 | Kotlin (Android) | Android 原生应用 |
+| 输入法 | C++17 + RIME | 跨平台输入法方案 |
+| 部署 | Docker + Nginx | 容器化部署 |
+
+---
+
+## 🔒 安全设计 | Security Design
+
+```
+应用层安全                    传输层安全                    数据层安全
+├── 输入验证与过滤             ├── TLS 加密传输              ├── AES-256-GCM 端到端加密
+├── SQL注入防护               └── JWT 身份认证              ├── bcrypt 密码哈希
+├── XSS攻击防护                                             └── 访问权限控制
+└── CSRF令牌保护
+```
+
+---
+
+## 🏆 验证结果 | Verification Results
+
+| 检查项 | 结果 | 状态 |
+|--------|------|------|
+| ESLint 代码质量 | 0 errors, 0 warnings | ✅ |
+| 服务端安全审计 | 0 vulnerabilities | ✅ |
+| 客户端安全审计 | 0 vulnerabilities | ✅ |
+| 依赖许可证合规 | 全部 MIT/BSD | ✅ |
+
+详见 [验证报告](Verification-Report.md)
+
+---
+
+## 🎯 品牌口号 | Brand Slogans
+
+- **心有灵犀，同步无界** - 核心品牌理念
+- **智慧连接，数据随行** - 功能价值主张
+- **When Minds Connect, Data Flows** - Core brand philosophy
+- **Intelligent Connections, Data On-the-Go** - Functional value proposition
+
+---
+
+## ⚖️ 法律声明 | Legal Notices
+
+- **开源许可证**: MIT License
+- **免责声明**: 本项目按"原样"提供，不提供任何明示或暗示的担保
+
+---
+
+## 📞 联系方式 | Contact
+
+- [GitHub Issues](https://github.com/liulanci/-MindSync/issues)
+- [GitHub Discussions](https://github.com/liulanci/-MindSync/discussions)

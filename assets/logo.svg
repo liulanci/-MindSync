@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A6CF7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bridgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.9" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect x="16" y="16" width="480" height="480" rx="96" ry="96" fill="url(#bgGrad)" />
+  
+  <!-- Bridge arc connecting two sides -->
+  <path d="M 100 320 Q 256 160 412 320" stroke="url(#bridgeGrad)" stroke-width="16" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  
+  <!-- Left bulb (device A) -->
+  <g transform="translate(100, 280)">
+    <!-- Bulb body -->
+    <circle cx="0" cy="0" r="36" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Bulb base -->
+    <rect x="-14" y="30" width="28" height="12" rx="3" fill="#FFFFFF" opacity="0.85"/>
+    <rect x="-10" y="42" width="20" height="6" rx="2" fill="#FFFFFF" opacity="0.75"/>
+    <!-- Filament lines -->
+    <path d="M -8 -8 Q 0 -20 8 -8" stroke="#4A6CF7" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M -5 -2 Q 0 -12 5 -2" stroke="#8B5CF6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Light rays -->
+    <line x1="-48" y1="0" x2="-42" y2="0" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="-40" y1="-24" x2="-35" y2="-20" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="-24" y1="-40" x2="-20" y2="-35" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="-48" x2="0" y2="-42" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  </g>
+  
+  <!-- Right bulb (device B) -->
+  <g transform="translate(412, 280)">
+    <!-- Bulb body -->
+    <circle cx="0" cy="0" r="36" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Bulb base -->
+    <rect x="-14" y="30" width="28" height="12" rx="3" fill="#FFFFFF" opacity="0.85"/>
+    <rect x="-10" y="42" width="20" height="6" rx="2" fill="#FFFFFF" opacity="0.75"/>
+    <!-- Filament lines -->
+    <path d="M -8 -8 Q 0 -20 8 -8" stroke="#4A6CF7" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M -5 -2 Q 0 -12 5 -2" stroke="#8B5CF6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Light rays -->
+    <line x1="48" y1="0" x2="42" y2="0" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="40" y1="-24" x2="35" y2="-20" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="24" y1="-40" x2="20" y2="-35" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+    <line x1="0" y1="-48" x2="0" y2="-42" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+  </g>
+  
+  <!-- Sync arrows on bridge -->
+  <g filter="url(#glow)">
+    <!-- Arrow pointing right -->
+    <polygon points="220,220 240,210 240,230" fill="#FFFFFF" opacity="0.9"/>
+    <!-- Arrow pointing left -->
+    <polygon points="292,220 272,210 272,230" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+  
+  <!-- Data flow dots -->
+  <circle cx="170" cy="268" r="4" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="200" cy="248" r="3.5" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="230" cy="232" r="3" fill="#FFFFFF" opacity="0.9"/>
+  <circle cx="256" cy="224" r="3" fill="#FFFFFF" opacity="1"/>
+  <circle cx="282" cy="232" r="3" fill="#FFFFFF" opacity="0.9"/>
+  <circle cx="312" cy="248" r="3.5" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="342" cy="268" r="4" fill="#FFFFFF" opacity="0.7"/>
+  
+  <!-- Bottom text area -->
+  <text x="256" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#FFFFFF" letter-spacing="2">灵犀</text>
+  <text x="256" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#FFFFFF" opacity="0.85" letter-spacing="4">MindSync</text>
+</svg>

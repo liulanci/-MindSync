@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/logo.svg" alt="灵犀/MindSync Logo" width="120" height="120">
+
 # 💡 灵犀 / MindSync
 
 ### 智能跨平台剪贴板同步解决方案 | Intelligent Cross-Platform Clipboard Synchronization Solution
@@ -130,6 +132,7 @@ docker-compose up -d
 | [技术规范](docs/Technical-Specifications.md) | 技术规格说明 |
 | [品牌口号](docs/Brand-Slogans.md) | 品牌标识体系 |
 | [验证报告](docs/Verification-Report.md) | 代码质量验证报告 |
+| [技术白皮书](docs/Technical-Paper.md) | 论文式技术阐述 |
 
 ### 🎯 品牌口号
 
