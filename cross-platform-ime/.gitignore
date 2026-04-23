@@ -1,0 +1,127 @@
+# 构建输出
+build/
+dist/
+out/
+bin/
+lib/
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# 编译中间文件
+*.obj
+*.o
+*.pch
+*.ilk
+*.pdb
+*.ipch
+*.sdf
+*.idb
+*.exp
+
+# IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# CMake生成文件
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# 依赖目录
+third_party/
+deps/
+external/
+
+# 平台特定文件
+*.app
+*.dmg
+*.pkg
+*.deb
+*.rpm
+*.msi
+*.apk
+*.ipa
+
+# 日志文件
+*.log
+logs/
+
+# 临时文件
+temp/
+tmp/
+*.tmp
+*.temp
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# 配置文件（排除示例）
+*.local.yaml
+*.local.json
+.env
+.env.local
+
+# 测试输出
+test-results/
+coverage/
+*.gcda
+*.gcno
+*.gcov
+
+# 文档生成
+docs/_build/
+docs/html/
+docs/latex/
+
+# 包管理器
+node_modules/
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 用户数据（开发环境）
+user_data/
+sync_data/
+
+# 备份文件
+*.bak
+*.backup
+*.old
+
+# 大文件
+*.zip
+*.tar.gz
+*.7z
+*.rar
+
+# 加密文件
+*.enc
+*.gpg
+
+# 系统文件
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# 项目特定
+rime_user_data/
+rime_sync_data/

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>剪贴板同步器</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div id="login-view" class="view">
+      <div class="auth-container">
+        <div class="auth-logo">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+            <rect x="8" y="8" width="48" height="48" rx="8" stroke="#4F46E5" stroke-width="3"/>
+            <rect x="16" y="16" width="32" height="32" rx="4" fill="#4F46E5" opacity="0.2"/>
+            <path d="M24 32h16M32 24v16" stroke="#4F46E5" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <h1>剪贴板同步器</h1>
+          <p class="subtitle">跨设备实时同步剪贴板内容</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="tab-btn active" data-tab="login">登录</button>
+          <button class="tab-btn" data-tab="register">注册</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-email">邮箱</label>
+            <input type="email" id="login-email" placeholder="请输入邮箱" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">密码</label>
+            <input type="password" id="login-password" placeholder="请输入密码" required>
+          </div>
+          <button type="submit" class="btn-primary">登录</button>
+          <div id="login-error" class="error-msg"></div>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <label for="reg-username">用户名</label>
+            <input type="text" id="reg-username" placeholder="3-50位字母数字下划线" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">邮箱</label>
+            <input type="email" id="reg-email" placeholder="请输入邮箱" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">密码</label>
+            <input type="password" id="reg-password" placeholder="至少8位，含大小写字母和数字" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-confirm">确认密码</label>
+            <input type="password" id="reg-confirm" placeholder="请再次输入密码" required>
+          </div>
+          <button type="submit" class="btn-primary">注册</button>
+          <div id="register-error" class="error-msg"></div>
+        </form>
+      </div>
+    </div>
+
+    <div id="main-view" class="view hidden">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="user-info">
+            <div class="avatar" id="user-avatar">U</div>
+            <div class="user-details">
+              <span class="username" id="username-display">用户</span>
+              <span class="sync-status" id="sync-status">
+                <span class="status-dot disconnected"></span>
+                未连接
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-btn active" data-view="clipboard">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="8" y="2" width="8" height="4" rx="1"/>
+              <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+            </svg>
+            剪贴板
+          </button>
+          <button class="nav-btn" data-view="devices">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
+            设备管理
+          </button>
+          <button class="nav-btn" data-view="backups">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            备份恢复
+          </button>
+          <button class="nav-btn" data-view="settings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+            设置
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button class="btn-logout" id="btn-logout">退出登录</button>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div id="clipboard-panel" class="panel">
+          <div class="panel-header">
+            <h2>剪贴板历史</h2>
+            <div class="panel-actions">
+              <div class="search-box">
+                <input type="text" id="search-input" placeholder="搜索剪贴板内容...">
+                <button id="search-btn" class="btn-icon" title="搜索">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                  </svg>
+                </button>
+              </div>
+              <select id="filter-type" class="select-sm">
+                <option value="">全部类型</option>
+                <option value="text">文本</option>
+                <option value="image">图片</option>
+              </select>
+              <button id="refresh-btn" class="btn-icon" title="刷新">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+                </svg>
+              </button>
+              <button id="clear-btn" class="btn-icon btn-danger" title="清除未固定记录">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div id="clipboard-list" class="clipboard-list">
+            <div class="empty-state">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5">
+                <rect x="8" y="2" width="8" height="4" rx="1"/>
+                <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+              </svg>
+              <p>暂无剪贴板记录</p>
+              <p class="hint">复制内容后将自动同步到此处</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="devices-panel" class="panel hidden">
+          <div class="panel-header">
+            <h2>设备管理</h2>
+            <button id="refresh-devices-btn" class="btn-icon" title="刷新">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/>
+              </svg>
+            </button>
+          </div>
+          <div id="devices-list" class="devices-list">
+            <div class="empty-state">
+              <p>暂无设备</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="backups-panel" class="panel hidden">
+          <div class="panel-header">
+            <h2>备份与恢复</h2>
+            <button id="create-backup-btn" class="btn-primary btn-sm">创建备份</button>
+          </div>
+          <div id="backups-list" class="backups-list">
+            <div class="empty-state">
+              <p>暂无备份记录</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="settings-panel" class="panel hidden">
+          <div class="panel-header">
+            <h2>设置</h2>
+          </div>
+          <div class="settings-form">
+            <div class="setting-group">
+              <h3>服务器配置</h3>
+              <div class="form-group">
+                <label>服务器地址</label>
+                <input type="text" id="setting-server-url" placeholder="http://localhost:3000">
+              </div>
+            </div>
+
+            <div class="setting-group">
+              <h3>同步选项</h3>
+              <div class="setting-item">
+                <label>同步文本内容</label>
+                <input type="checkbox" id="setting-sync-text" checked>
+              </div>
+              <div class="setting-item">
+                <label>同步图片内容</label>
+                <input type="checkbox" id="setting-sync-images" checked>
+              </div>
+              <div class="setting-item">
+                <label>显示通知</label>
+                <input type="checkbox" id="setting-notifications" checked>
+              </div>
+              <div class="setting-item">
+                <label>开机自启动</label>
+                <input type="checkbox" id="setting-autostart" checked>
+              </div>
+            </div>
+
+            <div class="setting-group">
+              <h3>设备信息</h3>
+              <div class="form-group">
+                <label>设备名称</label>
+                <input type="text" id="setting-device-name">
+              </div>
+              <div class="form-group">
+                <label>设备ID</label>
+                <input type="text" id="setting-device-id" readonly class="readonly">
+              </div>
+            </div>
+
+            <button id="save-settings-btn" class="btn-primary">保存设置</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div id="modal-content" class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">提示</h3>
+        <button id="modal-close" class="btn-icon">&times;</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

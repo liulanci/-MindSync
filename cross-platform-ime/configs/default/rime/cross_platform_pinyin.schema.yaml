@@ -1,0 +1,125 @@
+# 跨平台输入法 - 定制拼音输入方案
+# 基于雾凇拼音方案，集成镜像云词库
+# encoding: utf-8
+
+schema:
+  schema_id: cross_platform_pinyin
+  name: 跨平台拼音
+  version: "1.0.0"
+  author:
+    - "Cross-Platform IME Team"
+  description: |
+    跨平台输入法定制拼音方案
+    集成镜像云词库，支持多设备同步
+    基于雾凇拼音方案定制
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - affix_segmentor@extra
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - lua_translator@date_translator
+    - lua_translator@unicode_translator
+  filters:
+    - simplifier
+    - uniquifier
+    - lua_filter@filter_single_char
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    - erase/^xx$/
+    - abbrev/^([a-z]).+$/$1/
+    - abbrev/^([zcs]h).+$/$1/
+    - derive/^([zcs])h/$1/
+    - derive/^([zcs])([^h])/$1h$2/
+    - derive/([aei])n$/$1ng/
+    - derive/([aei])ng$/$1n/
+    - derive/([iu])an$/$ian/
+    - derive/([iu])ang$/$iang/
+    - derive/([iu])ong$/$iong/
+    - derive/ng$/n/
+    - derive/([iu])a(o|ng?)$/a$2/
+  initials:
+    z: zh
+    c: ch
+    s: sh
+  finals:
+    an: ang
+    en: eng
+    in: ing
+
+translator:
+  dictionary: cross_platform_pinyin
+  prism: cross_platform_pinyin
+  spelling_hints: 8
+  preedit_format:
+    - xform/([nl])v/$1ü/
+    - xform/([nl])ue/$1üe/
+    - xform/([jqxy])v/$1u/
+  comment_format:
+    - xform/([nl])v/$1ü/
+    - xform/([jqxy])v/$1u/
+
+simplifier:
+  option_name: simplification
+  opencc_config: t2s.json
+  tips: all
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: has_menu, accept: semicolon, send: 2 }
+    - { when: has_menu, accept: apostrophe, send: 3 }
+    - { when: paging, accept: minus, send: Page_Up }
+    - { when: has_menu, accept: equal, send: Page_Down }
+    - { when: always, accept: Control+Shift+1, toggle: simplification }
+    - { when: always, accept: Control+Shift+2, toggle: full_shape }
+    - { when: always, accept: Control+Shift+3, toggle: ascii_punct }
+    - { when: always, accept: Control+Shift+4, toggle: cloud_sync }
+
+recognizer:
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    extra: "^extra$"
+
+menu:
+  page_size: 5
+
+style:
+  horizontal: true
+  font_face: "Microsoft YaHei"
+  font_point: 14
+  inline_preedit: true
+  candidate_format: "%c\u2005%@ \u2005"
+  candidate_abbreviate_length: 30
+  color_scheme: default
+
+# 云词库配置
+cloud_dict:
+  enable: true
+  server_url: "https://api.ime-cloud.com/v1"
+  sync_interval: 300
+  enable_encryption: true
+  max_cache_size: 100000
+  enable_auto_sync: true
+  enable_incremental_sync: true

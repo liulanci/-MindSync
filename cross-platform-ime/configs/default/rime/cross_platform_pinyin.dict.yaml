@@ -1,0 +1,47 @@
+# 跨平台输入法 - 定制拼音词库
+# 集成镜像云词库
+# encoding: utf-8
+
+---
+name: cross_platform_pinyin
+version: "1.0.0"
+sort: by_weight
+use_preset_vocabulary: true
+import_tables:
+  - cross_platform_pinyin_base
+  - cross_platform_pinyin_cloud
+  - cross_platform_pinyin_ext
+...
+
+# 基础词库条目
+# 格式: 文字<tab>编码<tab>权重
+的	de	1.0
+一	yi	0.95
+是	shi	0.94
+不了	bu	0.93
+人	ren	0.92
+我	wo	0.91
+在	zai	0.90
+有	you	0.89
+他	ta	0.88
+这	zhe	0.87
+中	zhong	0.86
+大	da	0.85
+来	lai	0.84
+国	guo	0.83
+和	he	0.82
+到	dao	0.81
+时	shi	0.80
+地	di	0.79
+为	wei	0.78
+子	zi	0.77
+说	shuo	0.76
+生	sheng	0.75
+会	hui	0.74
+城	cheng	0.73
+也	ye	0.72
+着	zhe	0.71
+年	nian	0.70
+得	de	0.69
+能	neng	0.68
+那	na	0.67
