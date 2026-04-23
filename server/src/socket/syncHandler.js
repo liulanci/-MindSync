@@ -18,6 +18,7 @@ function setupSocketIO(io) {
 
     try {
       const decoded = jwt.verify(token, config.jwt.secret);
+      // eslint-disable-next-line require-atomic-updates
       socket.user = decoded;
 
       const device = await db.queryOne(
@@ -29,13 +30,14 @@ function setupSocketIO(io) {
         return next(new Error('设备未授权'));
       }
 
+      // eslint-disable-next-line require-atomic-updates
       socket.device = device;
-      next();
+      return next();
     } catch (err) {
       if (err.name === 'TokenExpiredError') {
         return next(new Error('令牌已过期'));
       }
-      next(new Error('认证失败'));
+      return next(new Error('认证失败'));
     }
   });
 

@@ -1,5 +1,4 @@
 const authService = require('../services/authService');
-const { v4: uuidv4 } = require('uuid');
 
 describe('Auth Service', () => {
   describe('register', () => {
@@ -89,6 +88,7 @@ describe('Password Validation', () => {
     ];
 
     for (const password of weakPasswords) {
+      // eslint-disable-next-line no-await-in-loop
       await expect(
         authService.register('testuser', 'test@example.com', password)
       ).rejects.toThrow();

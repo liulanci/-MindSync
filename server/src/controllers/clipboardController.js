@@ -1,5 +1,4 @@
 const clipboardService = require('../services/clipboardService');
-const { validate, clipboardItemSchema, syncPullSchema } = require('../utils/validator');
 const multer = require('multer');
 const path = require('path');
 const config = require('../config');
@@ -39,9 +38,9 @@ async function pushItem(req, res) {
     const itemData = req.validatedBody;
     const deviceId = req.headers['x-device-id'];
     const result = await clipboardService.pushClipboardItem(req.user.userId, deviceId, itemData);
-    res.status(201).json({ message: '推送成功', data: result });
+    return res.status(201).json({ message: '推送成功', data: result });
   } catch (err) {
-    res.status(500).json({ error: '推送失败' });
+    return res.status(500).json({ error: '推送失败' });
   }
 }
 
@@ -60,9 +59,9 @@ async function pushFile(req, res) {
     };
 
     const result = await clipboardService.pushClipboardItem(req.user.userId, deviceId, itemData);
-    res.status(201).json({ message: '文件推送成功', data: result });
+    return res.status(201).json({ message: '文件推送成功', data: result });
   } catch (err) {
-    res.status(500).json({ error: '文件推送失败' });
+    return res.status(500).json({ error: '文件推送失败' });
   }
 }
 
@@ -74,9 +73,9 @@ async function pullItems(req, res) {
       limit: parseInt(req.query.limit, 10) || 50,
     };
     const items = await clipboardService.pullClipboardItems(req.user.userId, options);
-    res.json({ data: items });
+    return res.json({ data: items });
   } catch (err) {
-    res.status(500).json({ error: '拉取失败' });
+    return res.status(500).json({ error: '拉取失败' });
   }
 }
 
@@ -86,33 +85,33 @@ async function getItem(req, res) {
     if (!item) {
       return res.status(404).json({ error: '条目未找到' });
     }
-    res.json({ data: item });
+    return res.json({ data: item });
   } catch (err) {
-    res.status(500).json({ error: '获取条目失败' });
+    return res.status(500).json({ error: '获取条目失败' });
   }
 }
 
 async function deleteItem(req, res) {
   try {
     await clipboardService.deleteClipboardItem(req.user.userId, req.params.itemId);
-    res.json({ message: '删除成功' });
+    return res.json({ message: '删除成功' });
   } catch (err) {
     if (err.message.includes('未找到')) {
       return res.status(404).json({ error: err.message });
     }
-    res.status(500).json({ error: '删除失败' });
+    return res.status(500).json({ error: '删除失败' });
   }
 }
 
 async function togglePin(req, res) {
   try {
     const result = await clipboardService.togglePinItem(req.user.userId, req.params.itemId);
-    res.json({ data: result });
+    return res.json({ data: result });
   } catch (err) {
     if (err.message.includes('未找到')) {
       return res.status(404).json({ error: err.message });
     }
-    res.status(500).json({ error: '操作失败' });
+    return res.status(500).json({ error: '操作失败' });
   }
 }
 
@@ -125,9 +124,9 @@ async function searchItems(req, res) {
     const items = await clipboardService.searchClipboardItems(req.user.userId, keyword, {
       limit: parseInt(req.query.limit, 10) || 20,
     });
-    res.json({ data: items });
+    return res.json({ data: items });
   } catch (err) {
-    res.status(500).json({ error: '搜索失败' });
+    return res.status(500).json({ error: '搜索失败' });
   }
 }
 
@@ -135,9 +134,9 @@ async function clearHistory(req, res) {
   try {
     const { before_date } = req.query;
     const deletedCount = await clipboardService.clearClipboardHistory(req.user.userId, before_date);
-    res.json({ message: `已清除 ${deletedCount} 条记录`, deleted_count: deletedCount });
+    return res.json({ message: `已清除 ${deletedCount} 条记录`, deleted_count: deletedCount });
   } catch (err) {
-    res.status(500).json({ error: '清除历史失败' });
+    return res.status(500).json({ error: '清除历史失败' });
   }
 }
 

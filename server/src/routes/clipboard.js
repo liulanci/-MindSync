@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const clipboardController = require('../controllers/clipboardController');
-const { validate, clipboardItemSchema, syncPullSchema } = require('../utils/validator');
+const { validate, clipboardItemSchema } = require('../utils/validator');
 const { authMiddleware, deviceAuthMiddleware } = require('../middleware/auth');
 
 router.use(authMiddleware);

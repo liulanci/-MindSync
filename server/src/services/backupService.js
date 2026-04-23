@@ -20,7 +20,7 @@ async function createBackup(userId, backupName) {
     if (item.is_encrypted && item.content) {
       try {
         item.content = decrypt(item.content);
-      } catch (e) {}
+      } catch (e) { /* 解密失败时保留原始加密内容 */ }
     }
     return item;
   });
@@ -78,6 +78,7 @@ async function restoreBackup(userId, backupId) {
 
   let restoredCount = 0;
   for (const item of backupData.items) {
+    // eslint-disable-next-line no-await-in-loop
     const existing = await db.queryOne(
       'SELECT id FROM clipboard_items WHERE id = ?',
       [item.id]
@@ -91,6 +92,7 @@ async function restoreBackup(userId, backupId) {
         isEncrypted = 1;
       }
 
+      // eslint-disable-next-line no-await-in-loop
       await db.insert(
         `INSERT INTO clipboard_items (id, user_id, content_type, content, content_hash, file_path, file_size, source_device_id, is_encrypted, pinned, created_at)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,

@@ -59,7 +59,7 @@ app.use('/api/clipboard', clipboardRoutes);
 app.use('/api/backups', backupRoutes);
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', version: '1.0.0', timestamp: new Date().toISOString() });
+  return res.json({ status: 'ok', version: '1.0.0', timestamp: new Date().toISOString() });
 });
 
 app.use((err, req, res, _next) => {
@@ -71,11 +71,11 @@ app.use((err, req, res, _next) => {
   }
 
   logger.error('未处理的错误:', err);
-  res.status(500).json({ error: '服务器内部错误' });
+  return res.status(500).json({ error: '服务器内部错误' });
 });
 
 app.use((req, res) => {
-  res.status(404).json({ error: '接口不存在' });
+  return res.status(404).json({ error: '接口不存在' });
 });
 
 setupSocketIO(io);
@@ -96,7 +96,7 @@ async function start() {
   } catch (err) {
     logger.error('启动失败:', err);
     logger.error('请确保MySQL服务已启动且配置正确');
-    process.exit(1);
+    throw err;
   }
 }
 

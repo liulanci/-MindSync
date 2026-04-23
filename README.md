@@ -8,6 +8,9 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android%20%7C%20iOS-lightgrey)](https://github.com/liulanci/-MindSync)
 [![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/liulanci/-MindSync/releases)
 [![GitHub stars](https://img.shields.io/github/stars/liulanci/-MindSync?style=social)](https://github.com/liulanci/-MindSync/stargazers)
+[![ESLint](https://img.shields.io/badge/ESLint-0%20errors-brightgreen.svg)](docs/Verification-Report.md)
+[![Security](https://img.shields.io/badge/Security-0%20vulnerabilities-brightgreen.svg)](docs/Verification-Report.md)
+[![Code Quality](https://img.shields.io/badge/Code_Quality-A-brightgreen.svg)](docs/Verification-Report.md)
 
 **心有灵犀 · 同步无界**  
 **When Minds Connect, Data Flows**

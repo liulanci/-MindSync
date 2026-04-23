@@ -3,6 +3,14 @@ const db = require('../config/database');
 const logger = require('../config/logger');
 const { encrypt, decrypt, hashContent } = require('../utils/crypto');
 
+async function logSync(userId, deviceId, clipboardItemId, action, status, errorMessage = null) {
+  const logId = uuidv4();
+  await db.insert(
+    'INSERT INTO sync_logs (id, user_id, device_id, clipboard_item_id, action, status, error_message) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [logId, userId, deviceId, clipboardItemId, action, status, errorMessage]
+  );
+}
+
 async function pushClipboardItem(userId, deviceId, itemData) {
   const itemId = uuidv4();
   let content = itemData.content || null;
@@ -127,7 +135,7 @@ async function searchClipboardItems(userId, keyword, options = {}) {
     if (item.is_encrypted && item.content) {
       try {
         item.content = decrypt(item.content);
-      } catch (e) {}
+      } catch (e) { /* 解密失败时保留原始加密内容 */ }
     }
     return item;
   });
@@ -147,14 +155,6 @@ async function clearClipboardHistory(userId, beforeDate = null) {
     [userId]
   );
   return result.affectedRows;
-}
-
-async function logSync(userId, deviceId, clipboardItemId, action, status, errorMessage = null) {
-  const logId = uuidv4();
-  await db.insert(
-    'INSERT INTO sync_logs (id, user_id, device_id, clipboard_item_id, action, status, error_message) VALUES (?, ?, ?, ?, ?, ?, ?)',
-    [logId, userId, deviceId, clipboardItemId, action, status, errorMessage]
-  );
 }
 
 module.exports = {

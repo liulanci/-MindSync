@@ -16,6 +16,7 @@ beforeEach(async () => {
   const tables = await db.query('SHOW TABLES');
   for (const table of tables) {
     const tableName = Object.values(table)[0];
+    // eslint-disable-next-line no-await-in-loop
     await db.query(`TRUNCATE TABLE ${tableName}`);
   }
   await db.query('SET FOREIGN_KEY_CHECKS = 1');

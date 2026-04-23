@@ -4,7 +4,6 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../config/database');
 const config = require('../config');
 const logger = require('../config/logger');
-const { generateToken } = require('../utils/crypto');
 
 const SALT_ROUNDS = 12;
 

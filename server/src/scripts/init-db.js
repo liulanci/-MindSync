@@ -127,8 +127,7 @@ async function initDatabase() {
 
 if (require.main === module) {
   initDatabase()
-    .then(() => process.exit(0))
-    .catch(() => process.exit(1));
+    .catch((err) => { throw err; });
 }
 
 module.exports = initDatabase;

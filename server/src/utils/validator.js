@@ -48,7 +48,7 @@ function validate(schema) {
         return res.status(400).json({ error: '参数验证失败', details: errors });
       }
       req.validatedBody = result.data;
-      next();
+      return next();
     } catch (err) {
       return res.status(400).json({ error: '参数验证失败' });
     }
