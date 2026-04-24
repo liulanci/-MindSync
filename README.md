@@ -169,19 +169,52 @@ docker-compose up -d
 - 桌面端：进入 `client/` 目录构建
 - Android：进入 `android-app/` 目录构建 APK
 
-### 📖 文档
+---
+
+## 📚 项目Wiki文档 | Project Wiki Documentation
+
+> **高端大气上档次的知识体系** | High-End Knowledge System
+
+### 📖 核心文档 | Core Documents
+
+| 文档 | 中文说明 | English Description |
+|------|----------|---------------------|
+| [🏛️ 技术白皮书](docs/Technical-Paper.md) | **论文式技术阐述** - 系统设计与实现的完整学术论述 | Thesis-style technical elaboration |
+| [✅ 验证报告](docs/Verification-Report.md) | **代码质量验证报告** - 真实测试数据与安全审计 | Code quality verification report |
+| [🚀 快速入门](docs/Getting-Started.md) | **5分钟上手指南** - 快速体验核心功能 | 5-minute quick start guide |
+| [📦 安装指南](docs/Installation-Guide.md) | **详细安装步骤** - 多平台部署方案 | Detailed installation guide |
+
+### 🔧 功能文档 | Feature Documents
 
 | 文档 | 说明 |
 |------|------|
-| [快速入门](docs/Getting-Started.md) | 5分钟上手指南 |
-| [安装指南](docs/Installation-Guide.md) | 详细安装步骤 |
-| [用户手册](docs/User-Manual.md) | 完整功能说明 |
-| [API文档](docs/API-Documentation.md) | 接口参考文档 |
-| [架构设计](docs/Architecture-Design.md) | 技术架构详解 |
-| [技术规范](docs/Technical-Specifications.md) | 技术规格说明 |
-| [品牌口号](docs/Brand-Slogans.md) | 品牌标识体系 |
-| [验证报告](docs/Verification-Report.md) | 代码质量验证报告 |
-| [技术白皮书](docs/Technical-Paper.md) | 论文式技术阐述 |
+| [📖 用户手册](docs/User-Manual.md) | 完整功能使用说明，涵盖所有核心功能 |
+| [🔌 API文档](docs/API-Documentation.md) | RESTful API 接口参考，支持开发者集成 |
+| [🏗️ 架构设计](docs/Architecture-Design.md) | 系统架构详解，技术选型与设计思想 |
+
+### 📋 规范文档 | Specification Documents
+
+| 文档 | 说明 |
+|------|------|
+| [📐 技术规范](docs/Technical-Specifications.md) | 技术规格说明，接口定义与数据格式 |
+| [🎯 品牌口号](docs/Brand-Slogans.md) | 品牌标识体系，口号与视觉规范 |
+| [🤝 贡献指南](CONTRIBUTING.md) | 参与项目开发指南，代码规范与流程 |
+
+### 📊 文档概览
+
+```
+Wiki文档体系
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  核心文档    ████████████████████████████████  4篇
+  功能文档    ████████████████████              3篇
+  规范文档    ████████████████████              3篇
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  总计: 10篇 | 全部中英双语 | 专业学术风格
+```
+
+> **Wiki同步说明**: GitCode Wiki从GitHub自动同步。由于GitHub Wiki功能限制，文档托管在主仓库的 `docs/` 目录中，通过本页面导航访问。
+
+---
 
 ### 🎯 品牌口号
 
